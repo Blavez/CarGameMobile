@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3950583012346268207}
-  - component: {fileID: 6374357826842935290}
   - component: {fileID: -1231858135455836628}
   m_Layer: 0
   m_Name: endlessMove
@@ -32,19 +31,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6374357826842935290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 748278768431819595}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8911fab2d10c48169567a1640ba452a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _inputMultiplier: 0.05
 --- !u!114 &-1231858135455836628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,4 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14d12a6d648d0bc40a042e74e4de8868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputMultiplier: 10
+  _inputMultiplier: 100
