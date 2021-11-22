@@ -8,6 +8,12 @@ namespace Ui
     {
         [SerializeField] private Button _buttonStart;
         [SerializeField] private Button _buttonSettings;
+<<<<<<< Updated upstream
+=======
+        [SerializeField] private Button _buttonRewarded;
+        [SerializeField] private Button _buttonBuying;
+        [SerializeField] private Button _buttonInventory;
+>>>>>>> Stashed changes
 
 
         public void Init(UnityAction startGame, UnityAction settings)
