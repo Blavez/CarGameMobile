@@ -1,6 +1,9 @@
 using Profile;
+using Services.Ads.UnityAds;
+using Services.IAP;
 using Tool;
 using UnityEngine;
+using UnityEngine.Analytics;
 using Object = UnityEngine.Object;
 
 namespace Ui
@@ -10,17 +13,16 @@ namespace Ui
         private readonly ResourcePath _resourcePath = new ResourcePath("Prefabs/MainMenu");
         private readonly ProfilePlayer _profilePlayer;
         private readonly MainMenuView _view;
+        private UnityAdsService _adsService;
+        private IAPService _iapService;
 
-
-        public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer)
+        public MainMenuController(Transform placeForUi, ProfilePlayer profilePlayer, UnityAdsService adsService, IAPService iapService)
         {
             _profilePlayer = profilePlayer;
+            _adsService = adsService;
+            _iapService = iapService;
             _view = LoadView(placeForUi);
-<<<<<<< Updated upstream
-            _view.Init(StartGame, Settings);
-=======
             _view.Init(StartGame, Settings, ShowRewarded, Buying, Inventory);
->>>>>>> Stashed changes
         }
 
         private MainMenuView LoadView(Transform placeForUi)
@@ -37,8 +39,6 @@ namespace Ui
 
         private void Settings() =>
             _profilePlayer.CurrentState.Value = GameState.Settings;
-<<<<<<< Updated upstream
-=======
 
         private void Buying()
         {
@@ -58,6 +58,5 @@ namespace Ui
         }
         private void OnAdsInitialized() => _adsService.RewardedPlayer.Play();
         private void OnIapInitialized() => _iapService.Buy("product_1");
->>>>>>> Stashed changes
     }
 }

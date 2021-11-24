@@ -10,8 +10,4 @@ namespace Features.Inventory.Items
 
         public IReadOnlyList<ItemConfig> ItemConfigs => _itemConfigs;
     }
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes

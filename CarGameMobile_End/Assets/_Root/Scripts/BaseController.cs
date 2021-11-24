@@ -7,7 +7,6 @@ using Object = UnityEngine.Object;
 internal abstract class BaseController : IDisposable
 {
     private List<BaseController> _baseControllers;
-    private List<IDisposable> _disposables;
     private List<GameObject> _gameObjects;
     private List<IDisposable> _disposables;
     private bool _isDisposed;
@@ -41,17 +40,10 @@ internal abstract class BaseController : IDisposable
     {
         if (_disposables == null)
             return;
-<<<<<<< Updated upstream
-        foreach (IDisposable disposable in _disposables)
-        {
-            disposable.Dispose();
-        }
-=======
 
         foreach (IDisposable disposable in _disposables)
             disposable.Dispose();
 
->>>>>>> Stashed changes
         _disposables.Clear();
     }
 
@@ -80,10 +72,7 @@ internal abstract class BaseController : IDisposable
         _disposables ??= new List<IDisposable>();
         _disposables.Add(repository);
     }
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
     protected void AddGameObject(GameObject gameObject)
     {
         _gameObjects ??= new List<GameObject>();

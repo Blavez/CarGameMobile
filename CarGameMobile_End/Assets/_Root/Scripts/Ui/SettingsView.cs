@@ -9,8 +9,8 @@ namespace Ui
         [SerializeField] private Button _buttonBack;
 
 
-        public void Init(UnityAction BackToMain) =>
-            _buttonBack.onClick.AddListener(BackToMain);
+        public void Init(UnityAction backToMain) =>
+            _buttonBack.onClick.AddListener(backToMain);
 
 
         public void OnDestroy()

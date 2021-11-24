@@ -82,8 +82,4 @@ namespace Features.Inventory
             _model.UnequipItem(itemId);
         }
     }
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes

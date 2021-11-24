@@ -6,7 +6,7 @@ namespace Game.InputLogic
 {
     internal class InputKeyboard : BaseInputView
     {
-        [SerializeField] private float _inputMultiplier = 10;
+        [SerializeField] private float _inputMultiplier = 10000000;
 
 
         private void Start() =>
@@ -24,7 +24,7 @@ namespace Game.InputLogic
                 float abs = Mathf.Abs(moveValue);
                 OnRightMove(abs);
             }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 float moveValue = _inputMultiplier * Time.deltaTime;
                 float abs = Mathf.Abs(moveValue);
