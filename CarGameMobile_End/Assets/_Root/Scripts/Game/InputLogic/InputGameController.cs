@@ -1,5 +1,4 @@
-using Game.Boat;
-using Game.Car;
+using Game.Transport;
 using Tool;
 using UnityEngine;
 
@@ -7,25 +6,17 @@ namespace Game.InputLogic
 {
     internal class InputGameController : BaseController
     {
-        private readonly ResourcePath _resourcePath = new ResourcePath("Prefabs/EndlessMove");
+        private readonly ResourcePath _resourcePath = new ResourcePath("Prefabs/endlessMove");
         private BaseInputView _view;
 
 
         public InputGameController(
             SubscriptionProperty<float> leftMove,
             SubscriptionProperty<float> rightMove,
-            CarModel car)
+            TransportModel transportModel)
         {
             _view = LoadView();
-            _view.Init(leftMove, rightMove, car.Speed);
-        }
-        public InputGameController(
-    SubscriptionProperty<float> leftMove,
-    SubscriptionProperty<float> rightMove,
-    BoatModel boat)
-        {
-            _view = LoadView();
-            _view.Init(leftMove, rightMove, boat.Speed);
+            _view.Init(leftMove, rightMove, transportModel.Speed);
         }
 
         private BaseInputView LoadView()
