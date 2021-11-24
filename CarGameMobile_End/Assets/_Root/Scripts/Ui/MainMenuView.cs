@@ -13,6 +13,7 @@ namespace Ui
         [SerializeField] private Button _buttonRewarded;
         [SerializeField] private Button _buttonBuying;
         [SerializeField] private Button _buttonInventory;
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 
 
@@ -20,13 +21,29 @@ namespace Ui
         {
             _buttonStart.onClick.AddListener(startGame);
             _buttonSettings.onClick.AddListener(settings);
+=======
+
+        public void Init(UnityAction startGame, UnityAction settings, UnityAction rewarded, UnityAction buying, UnityAction inventory)
+        {
+            _buttonStart.onClick.AddListener(startGame);
+            _buttonSettings.onClick.AddListener(settings);
+            _buttonRewarded.onClick.AddListener(rewarded);
+            _buttonBuying.onClick.AddListener(buying);
+            _buttonInventory.onClick.AddListener(inventory);
+>>>>>>> Stashed changes
         }
 
         public void OnDestroy()
         {
             _buttonStart.onClick.RemoveAllListeners();
             _buttonSettings.onClick.RemoveAllListeners();
+<<<<<<< Updated upstream
 
+=======
+            _buttonRewarded.onClick.RemoveAllListeners();
+            _buttonBuying.onClick.RemoveAllListeners();
+            _buttonInventory.onClick.RemoveAllListeners();
+>>>>>>> Stashed changes
         }
     }
 }

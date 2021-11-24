@@ -8,6 +8,10 @@ using Services.Analytics;
 using Services.Ads.UnityAds;
 using Services.IAP;
 using Features.Inventory;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+using Features.Shed;
 >>>>>>> Stashed changes
 
 internal class MainController : BaseController
@@ -19,7 +23,11 @@ internal class MainController : BaseController
     private GameController _gameController;
     private SettingsController _settingsController;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+    private ShedController _shedController;
+>>>>>>> Stashed changes
     private InventoryController _inventoryController;
     private AnalyticsManager _analytics;
     private UnityAdsService _adsService;
@@ -44,8 +52,12 @@ internal class MainController : BaseController
 =======
         _settingsController?.Dispose();
         _inventoryController?.Dispose();
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 
+=======
+        _shedController?.Dispose();
+>>>>>>> Stashed changes
         _profilePlayer.CurrentState.UnSubscribeOnChange(OnChangeGameState);
     }
 
@@ -59,27 +71,59 @@ internal class MainController : BaseController
                 _gameController?.Dispose();
                 _settingsController?.Dispose();
                 _inventoryController?.Dispose();
+<<<<<<< Updated upstream
                 break;
             case GameState.Game:
                 _gameController = new GameController(_profilePlayer);
                 _mainMenuController?.Dispose();
                 _inventoryController?.Dispose();
+=======
+                _shedController?.Dispose();
+                break;
+            case GameState.Game:
+                _gameController = new GameController(_placeForUi,_profilePlayer);
+                Debug.Log("GameController started");
+                _analytics.SendEvent("GameController started");
+                _mainMenuController?.Dispose();
+                _inventoryController?.Dispose();
+                _shedController?.Dispose();
+                break;
+            case GameState.Inventory:
+                _inventoryController = new InventoryController(_placeForUi, _profilePlayer.Inventory);
+                _mainMenuController?.Dispose();
+                _settingsController?.Dispose();
+                _gameController?.Dispose();
+>>>>>>> Stashed changes
                 break;
             case GameState.Settings:
                 Debug.Log("jdjd");
                 _settingsController = new SettingsController(_placeForUi, _profilePlayer);
                 _mainMenuController?.Dispose();
                 _inventoryController?.Dispose();
+<<<<<<< Updated upstream
                 break;
             case GameState.Inventory:
                 _inventoryController = new InventoryController(_placeForUi, _profilePlayer.inventoryModel);
                 _settingsController?.Dispose();
                 _gameController?.Dispose();
                 _mainMenuController?.Dispose();
+=======
+                _shedController?.Dispose();
+
+                break;
+            case GameState.Shed:
+                _shedController = new ShedController(_placeForUi, _profilePlayer);
+                _mainMenuController?.Dispose();
+                _settingsController?.Dispose();
+                _gameController?.Dispose();
+>>>>>>> Stashed changes
                 break;
             default:
                 _mainMenuController?.Dispose();
                 _gameController?.Dispose();
+                _inventoryController?.Dispose();
+                _settingsController?.Dispose();
+                _shedController?.Dispose();
                 break;
         }
     }
