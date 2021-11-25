@@ -6,6 +6,7 @@ using UnityEngine;
 using Features.Inventory;
 using Features.Shed.Upgrade;
 using JetBrains.Annotations;
+using Features.Inventory.Items;
 
 namespace Features.Shed
 {
@@ -53,12 +54,34 @@ namespace Features.Shed
 
         private InventoryController CreateInventoryController(Transform placeForUi)
         {
-            var inventoryController = new InventoryController(placeForUi, _profilePlayer.Inventory);
+            var inventoryView = LoadInventoryView(placeForUi);
+            var itemsRepository = CreateItemsRepository();
+            var inventoryModel = _profilePlayer.Inventory;
+            var inventoryController = new InventoryController(inventoryView, inventoryModel, itemsRepository);
             AddController(inventoryController);
 
             return inventoryController;
         }
 
+        private IItemsRepository CreateItemsRepository()
+        {
+            ResourcePath path = new ResourcePath("Configs/Inventory/ItemConfigDataSource");
+            ItemConfig[] itemConfigs = ContentDataSourceLoader.LoadItemConfigs(path);
+            var repository = new ItemsRepository(itemConfigs);
+            AddRepository(repository);
+
+            return repository;
+        }
+
+        private IInventoryView LoadInventoryView(Transform placeForUi)
+        {
+            ResourcePath path = new ResourcePath("Prefabs/Inventory/InventoryView");
+            GameObject prefab = ResourcesLoader.LoadPrefab(path);
+            GameObject objectView = UnityEngine.Object.Instantiate(prefab, placeForUi);
+            AddGameObject(objectView);
+
+            return objectView.GetComponent<InventoryView>();
+        }
         private ShedView LoadView(Transform placeForUi)
         {
             GameObject prefab = ResourcesLoader.LoadPrefab(_viewPath);
