@@ -19,7 +19,7 @@ namespace Features.Shed
         private readonly IShedView _viewShed;
         private readonly ProfilePlayer _profilePlayer;
         private readonly IInventoryController _inventoryController;
-        private readonly UpgradeHandlersRepository _upgradeHandlersRepository;
+        private readonly IUpgradeHandlersRepository _upgradeHandlersRepository;
         private readonly IInventoryView _view;
         private readonly IItemsRepository _repository;
 
@@ -30,7 +30,7 @@ namespace Features.Shed
             [NotNull] IInventoryView inventoryView,
             [NotNull] IItemsRepository itemsRepository,
             [NotNull] IInventoryController inventoryController,
-            [NotNull] UpgradeHandlersRepository upgradeHandlersRepository,
+            [NotNull] IUpgradeHandlersRepository upgradeHandlersRepository,
             [NotNull] IShedView viewShed)
 
         {
