@@ -24,10 +24,11 @@ namespace Features.Shed
 
         public ShedController(
             //[NotNull] Transform placeForUi,
+            [NotNull] IShedView viewShed,
             [NotNull] ProfilePlayer profilePlayer,
             [NotNull] IInventoryController inventoryController,
-            [NotNull] IUpgradeHandlersRepository upgradeHandlersRepository,
-            [NotNull] IShedView viewShed)
+            [NotNull] IUpgradeHandlersRepository upgradeHandlersRepository
+            )
 
         {
             //if (placeForUi == null)

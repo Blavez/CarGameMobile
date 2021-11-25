@@ -10,6 +10,8 @@ using Features.Shed;
 using Features.Shed.Upgrade;
 using Features.Inventory.Items;
 using Tool;
+using System.Collections.Generic;
+using System;
 
 internal class MainController : BaseController
 {
@@ -23,8 +25,8 @@ internal class MainController : BaseController
     private AnalyticsManager _analytics;
     private UnityAdsService _adsService;
     private IAPService _iapService;
-    private readonly ResourcePath _viewPath = new ResourcePath("Prefabs/Shed/ShedView");
-    private readonly ResourcePath _dataSourcePath = new ResourcePath("Configs/Shed/UpgradeItemConfigDataSource");
+    private readonly List<GameObject> _newObjects = new List<GameObject>();
+    private readonly List<IDisposable> _newDisposables = new List<IDisposable>();
 
     public MainController(Transform placeForUi, ProfilePlayer profilePlayer, AnalyticsManager analytics, UnityAdsService adsService, IAPService iapService)
     {
@@ -50,38 +52,52 @@ internal class MainController : BaseController
         {
             case GameState.Start:
                 DisposeAllControllers();
+                DisposeAllNew();
                 _mainMenuController = new MainMenuController(_placeForUi, _profilePlayer, _adsService, _iapService);
                 break;
             case GameState.Game:
                 DisposeAllControllers();
+                DisposeAllNew();
                 _gameController = new GameController(_placeForUi,_profilePlayer);
                 Debug.Log("GameController started");
                 _analytics.SendEvent("GameController started");
                 break;
             case GameState.Settings:
                 DisposeAllControllers();
+                DisposeAllNew();
                 _settingsController = new SettingsController(_placeForUi, _profilePlayer);
                 break;
             case GameState.Shed:
                 DisposeAllControllers();
-                _shedController = new ShedController(_profilePlayer, CreateInventoryController(_placeForUi), CreateRepository(), LoadView(_placeForUi));
+                DisposeAllNew();
+                _shedController = CreateShedController(_placeForUi);
                 break;
             default:
                 DisposeAllControllers();
                 break;
         }
     }
-
-
-    private IUpgradeHandlersRepository CreateRepository()
+    private void DisposeAllNew()
     {
-        UpgradeItemConfig[] upgradeConfigs = ContentDataSourceLoader.LoadUpgradeItemConfigs(_dataSourcePath);
-        var repository = new UpgradeHandlersRepository(upgradeConfigs);
-        AddRepository(repository);
-
-        return repository;
+        DisposeNewDisposables();
+        DisposeNewObjects();
     }
 
+    private void DisposeNewDisposables()
+    {
+        foreach (IDisposable disposable in _newDisposables)
+            disposable.Dispose();
+
+        _newDisposables.Clear();
+    }
+
+    private void DisposeNewObjects()
+    {
+        foreach (GameObject gameObject in _newObjects)
+            UnityEngine.Object.Destroy(gameObject);
+
+        _newObjects.Clear();
+    }
     private InventoryController CreateInventoryController(Transform placeForUi)
     {
         var inventoryView = LoadInventoryView(placeForUi);
@@ -89,7 +105,7 @@ internal class MainController : BaseController
         var inventoryModel = _profilePlayer.Inventory;
         var inventoryController = new InventoryController(inventoryView, inventoryModel, itemsRepository);
         AddController(inventoryController);
-
+        _newDisposables.Add(inventoryController);
         return inventoryController;
     }
 
@@ -99,7 +115,7 @@ internal class MainController : BaseController
         ItemConfig[] itemConfigs = ContentDataSourceLoader.LoadItemConfigs(path);
         var repository = new ItemsRepository(itemConfigs);
         AddRepository(repository);
-
+        _newDisposables.Add(repository);
         return repository;
     }
     private IInventoryView LoadInventoryView(Transform placeForUi)
@@ -108,15 +124,39 @@ internal class MainController : BaseController
         GameObject prefab = ResourcesLoader.LoadPrefab(path);
         GameObject objectView = UnityEngine.Object.Instantiate(prefab, placeForUi);
         AddGameObject(objectView);
-
+        _newObjects.Add(objectView);
         return objectView.GetComponent<InventoryView>();
     }
-    private IShedView LoadView(Transform placeForUi)
-    {
-        GameObject prefab = ResourcesLoader.LoadPrefab(_viewPath);
-        GameObject objectView = UnityEngine.Object.Instantiate(prefab, placeForUi, false);
-        AddGameObject(objectView);
 
+    private UpgradeHandlersRepository CreateShedRepository()
+    {
+        var path = new ResourcePath("Configs/Shed/UpgradeItemConfigDataSource");
+
+        UpgradeItemConfig[] upgradeConfigs = ContentDataSourceLoader.LoadUpgradeItemConfigs(path);
+        var repository = new UpgradeHandlersRepository(upgradeConfigs);
+        return repository;
+    }
+    private ShedController CreateShedController(Transform placeForUi)
+    {
+        InventoryController inventoryController = CreateInventoryController(placeForUi);
+        UpgradeHandlersRepository shedRepository = CreateShedRepository();
+        ShedView shedView = LoadShedView(placeForUi);
+
+        return new ShedController
+        (
+            shedView,
+            _profilePlayer,
+            inventoryController,
+            shedRepository
+        );
+    }
+    private ShedView LoadShedView(Transform placeForUi)
+    {
+        var path = new ResourcePath("Prefabs/Shed/ShedView");
+
+        GameObject prefab = ResourcesLoader.LoadPrefab(path);
+        GameObject objectView = UnityEngine.Object.Instantiate(prefab, placeForUi, false);
+        _newObjects.Add(objectView);
         return objectView.GetComponent<ShedView>();
     }
     private void DisposeAllControllers()
