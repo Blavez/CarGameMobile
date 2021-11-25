@@ -10,7 +10,7 @@ internal class EntryPoint : MonoBehaviour
     [SerializeField] private EntryPointConfig _initialEntryPoint;
     private float SpeedCar;
     private float JumpHeight;
-    private GameState InitialState = GameState.Start;
+    private GameState InitialState;
     private Game.TransportType TransportType = Game.TransportType.Car;
 
     [SerializeField] private Transform _placeForUi;
@@ -24,6 +24,8 @@ internal class EntryPoint : MonoBehaviour
     {
         SpeedCar = _initialEntryPoint.SpeedCar;
         JumpHeight = _initialEntryPoint.JumpHeight;
+        InitialState = _initialEntryPoint.InitialState;
+        TransportType = _initialEntryPoint.TransportType;
         var profilePlayer = new ProfilePlayer(SpeedCar, JumpHeight, TransportType, InitialState);
         _mainController = new MainController(_placeForUi, profilePlayer, _analytics, _adsService, _iapService);
 

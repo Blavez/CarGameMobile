@@ -515,6 +515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c1f1f3a311c471e921b56ebcc0f1a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _initialEntryPoint: {fileID: 11400000, guid: c9d4a9bd4430c4b4ca927b98b866ab38, type: 2}
   _placeForUi: {fileID: 1121267569}
   _analytics: {fileID: 1584052896}
   _adsService: {fileID: 517989824}
