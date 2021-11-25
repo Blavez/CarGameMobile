@@ -20,15 +20,11 @@ namespace Features.Shed
         private readonly ProfilePlayer _profilePlayer;
         private readonly IInventoryController _inventoryController;
         private readonly IUpgradeHandlersRepository _upgradeHandlersRepository;
-        private readonly IInventoryView _view;
-        private readonly IItemsRepository _repository;
 
 
         public ShedController(
             //[NotNull] Transform placeForUi,
             [NotNull] ProfilePlayer profilePlayer,
-            [NotNull] IInventoryView inventoryView,
-            [NotNull] IItemsRepository itemsRepository,
             [NotNull] IInventoryController inventoryController,
             [NotNull] IUpgradeHandlersRepository upgradeHandlersRepository,
             [NotNull] IShedView viewShed)
@@ -47,10 +43,6 @@ namespace Features.Shed
                  = upgradeHandlersRepository ?? throw new ArgumentNullException(nameof(upgradeHandlersRepository));
             _inventoryController
                  = inventoryController ?? throw new ArgumentNullException(nameof(inventoryController));
-            _view
-                 = inventoryView ?? throw new ArgumentNullException(nameof(inventoryView));
-            _repository
-                = itemsRepository ?? throw new ArgumentNullException(nameof(itemsRepository));
             _viewShed
                 = viewShed ?? throw new ArgumentNullException(nameof(viewShed));
             _viewShed.Init(Apply, Back);
