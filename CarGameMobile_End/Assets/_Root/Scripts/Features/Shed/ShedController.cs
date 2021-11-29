@@ -23,7 +23,6 @@ namespace Features.Shed
 
 
         public ShedController(
-            //[NotNull] Transform placeForUi,
             [NotNull] IShedView viewShed,
             [NotNull] ProfilePlayer profilePlayer,
             [NotNull] IInventoryController inventoryController,
@@ -31,15 +30,9 @@ namespace Features.Shed
             )
 
         {
-            //if (placeForUi == null)
-               // throw new ArgumentNullException(nameof(placeForUi));
-
             _profilePlayer
                 = profilePlayer ?? throw new ArgumentNullException(nameof(profilePlayer));
 
-            //_upgradeHandlersRepository = CreateRepository();
-            //_inventoryController = CreateInventoryController(placeForUi);
-            // _view = LoadView(placeForUi);
             _upgradeHandlersRepository
                  = upgradeHandlersRepository ?? throw new ArgumentNullException(nameof(upgradeHandlersRepository));
             _inventoryController

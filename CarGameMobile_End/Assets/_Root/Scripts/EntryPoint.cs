@@ -8,8 +8,6 @@ using Services.Ads.UnityAds;
 internal class EntryPoint : MonoBehaviour
 {
     [SerializeField] private EntryPointConfig _initialEntryPoint;
-    private float SpeedCar;
-    private float JumpHeight;
     private GameState InitialState;
     private Game.TransportType TransportType = Game.TransportType.Car;
 
@@ -22,8 +20,8 @@ internal class EntryPoint : MonoBehaviour
 
     private void Awake()
     {
-        SpeedCar = _initialEntryPoint.SpeedCar;
-        JumpHeight = _initialEntryPoint.JumpHeight;
+        float SpeedCar = _initialEntryPoint.SpeedCar;
+        float JumpHeight = _initialEntryPoint.JumpHeight;
         InitialState = _initialEntryPoint.InitialState;
         TransportType = _initialEntryPoint.TransportType;
         var profilePlayer = new ProfilePlayer(SpeedCar, JumpHeight, TransportType, InitialState);

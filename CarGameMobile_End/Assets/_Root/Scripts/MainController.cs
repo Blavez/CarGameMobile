@@ -42,6 +42,7 @@ internal class MainController : BaseController
     protected override void OnDispose()
     {
         DisposeAllControllers();
+        DisposeAllNew();
         _profilePlayer.CurrentState.UnSubscribeOnChange(OnChangeGameState);
     }
 
@@ -104,7 +105,6 @@ internal class MainController : BaseController
         var itemsRepository = CreateItemsRepository();
         var inventoryModel = _profilePlayer.Inventory;
         var inventoryController = new InventoryController(inventoryView, inventoryModel, itemsRepository);
-        AddController(inventoryController);
         _newDisposables.Add(inventoryController);
         return inventoryController;
     }
@@ -114,7 +114,6 @@ internal class MainController : BaseController
         ResourcePath path = new ResourcePath("Configs/Inventory/ItemConfigDataSource");
         ItemConfig[] itemConfigs = ContentDataSourceLoader.LoadItemConfigs(path);
         var repository = new ItemsRepository(itemConfigs);
-        AddRepository(repository);
         _newDisposables.Add(repository);
         return repository;
     }
@@ -123,7 +122,6 @@ internal class MainController : BaseController
         ResourcePath path = new ResourcePath("Prefabs/Inventory/InventoryView");
         GameObject prefab = ResourcesLoader.LoadPrefab(path);
         GameObject objectView = UnityEngine.Object.Instantiate(prefab, placeForUi);
-        AddGameObject(objectView);
         _newObjects.Add(objectView);
         return objectView.GetComponent<InventoryView>();
     }

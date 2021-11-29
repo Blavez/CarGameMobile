@@ -5,8 +5,8 @@ using UnityEngine;
 
 internal class EntryPointConfig : ScriptableObject
 {
-        [field: SerializeField] public float SpeedCar = 15f;
-        [field: SerializeField] public float JumpHeight = 15f;
-        [field: SerializeField] public GameState InitialState = GameState.Start;
-        [field: SerializeField] public Game.TransportType TransportType = Game.TransportType.Car;
+        public float SpeedCar = 15f;
+        public float JumpHeight = 15f;
+        public GameState InitialState = GameState.Start;
+        public Game.TransportType TransportType = Game.TransportType.Car;
 }
