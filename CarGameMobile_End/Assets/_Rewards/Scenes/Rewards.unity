@@ -1185,8 +1185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 063f1b92edbd4b8c812689152aa9dc57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <TimeCooldown>k__BackingField: 86400
-  <TimeDeadline>k__BackingField: 172800
+  <TimeCooldown>k__BackingField: 604800
+  <TimeDeadline>k__BackingField: 1209600
   <Rewards>k__BackingField:
   - <RewardType>k__BackingField: 0
     <IconCurrency>k__BackingField: {fileID: 21300000, guid: e0eac6b76fdd842e88a7f8c75ecffaf4, type: 3}
@@ -1194,7 +1194,7 @@ MonoBehaviour:
   - <RewardType>k__BackingField: 1
     <IconCurrency>k__BackingField: {fileID: 21300000, guid: f59401c5c79564fd1ae3bfb0876455a7, type: 3}
     <CountCurrency>k__BackingField: 100
-  - <RewardType>k__BackingField: 0
+  - <RewardType>k__BackingField: 2
     <IconCurrency>k__BackingField: {fileID: 21300000, guid: a03a39af61d16d94298132cfd5437225, type: 3}
     <CountCurrency>k__BackingField: 200
   <TimerNewReward>k__BackingField: {fileID: 932748650}

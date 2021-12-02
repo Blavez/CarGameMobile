@@ -51,7 +51,7 @@ namespace Rewards
             Diamond += value;
             RefreshText();
         }
-
+        
 
         private void RefreshText()
         {
