@@ -8,8 +8,8 @@ namespace Rewards
 {
     internal class DailyRewardView : MonoBehaviour
     {
-        private const string CurrentSlotInActiveKey = nameof(CurrentSlotInActiveKey);
-        private const string TimeGetRewardKey = nameof(TimeGetRewardKey);
+        [SerializeField] private string CurrentSlotInActiveKey = nameof(CurrentSlotInActiveKey);
+        [SerializeField] private string TimeGetRewardKey = nameof(TimeGetRewardKey);
 
         [field: Header("Settings Time Get Reward")]
         [field: SerializeField] public float TimeCooldown { get; private set; } = 604800;

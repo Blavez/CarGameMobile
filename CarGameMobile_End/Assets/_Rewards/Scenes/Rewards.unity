@@ -1185,6 +1185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 063f1b92edbd4b8c812689152aa9dc57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentSlotInActiveKey: CurrentSlotInActiveWeeklyKey
+  TimeGetRewardKey: TimeGetRewardWeeklyKey
   <TimeCooldown>k__BackingField: 604800
   <TimeDeadline>k__BackingField: 1209600
   <Rewards>k__BackingField:
