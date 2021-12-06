@@ -23,6 +23,7 @@ namespace _Tween.Scripts.Editor
             var animationType = new PropertyField(serializedObject.FindProperty(CustomButtonByInheritance.AnimationTypeName));
             var curveEase = new PropertyField(serializedObject.FindProperty(CustomButtonByInheritance.CurveEaseName));
             var duration = new PropertyField(serializedObject.FindProperty(CustomButtonByInheritance.DurationName));
+            var importantText = new PropertyField(serializedObject.FindProperty(CustomButtonByInheritance.ImportantText));
 
             var tweenLabel = new Label("Settings Tween");
             var intractableLabel = new Label("Interactable");
@@ -31,6 +32,7 @@ namespace _Tween.Scripts.Editor
             root.Add(animationType);
             root.Add(curveEase);
             root.Add(duration);
+            root.Add(importantText);
 
             root.Add(intractableLabel);
             root.Add(new IMGUIContainer(OnInspectorGUI));

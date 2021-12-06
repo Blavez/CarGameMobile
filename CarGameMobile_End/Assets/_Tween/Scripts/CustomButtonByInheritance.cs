@@ -11,15 +11,19 @@ namespace _Tween.Scripts
         public static string AnimationTypeName => nameof(_animationButtonType);
         public static string CurveEaseName => nameof(_curveEase);
         public static string DurationName => nameof(_duration);
+        public static string ImportantText => nameof(_importantText);
 
         [SerializeField] private RectTransform _rectTransform;
-
         [SerializeField] private AnimationButtonType _animationButtonType = AnimationButtonType.ChangePosition;
         [SerializeField] private Ease _curveEase = Ease.Linear;
         [SerializeField] private float _duration = 0.6f;
         [SerializeField] private float _strength = 30f;
-
-
+        [SerializeField] private string _importantText = "Very important text";
+        [ContextMenu("KillAnimation")]
+        void KillAnimation()
+        {
+            _rectTransform.DOKill(true);
+        }
         protected override void Awake()
         {
             base.Awake();
