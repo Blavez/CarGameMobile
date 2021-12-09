@@ -21,6 +21,7 @@ internal class MainController : BaseController
     private MainMenuController _mainMenuController;
     private GameController _gameController;
     private SettingsController _settingsController;
+    private BackToMainController _backToMainController;
     private ShedController _shedController;
     private AnalyticsManager _analytics;
     private UnityAdsService _adsService;
@@ -60,6 +61,7 @@ internal class MainController : BaseController
                 DisposeAllControllers();
                 DisposeAllNew();
                 _gameController = new GameController(_placeForUi,_profilePlayer);
+                _backToMainController = new BackToMainController(_placeForUi,_profilePlayer);
                 Debug.Log("GameController started");
                 _analytics.SendEvent("GameController started");
                 break;
@@ -163,5 +165,6 @@ internal class MainController : BaseController
         _gameController?.Dispose();
         _settingsController?.Dispose();
         _shedController?.Dispose();
+        _backToMainController?.Dispose();
     }
 }
